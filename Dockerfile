@@ -34,4 +34,5 @@ ENV BOOT "http://www.example.com/image.iso"
 ARG VERSION_ARG="0.0"
 RUN echo "$VERSION_ARG" > /run/version
 
-ENTRYPOINT ["/usr/bin/tini", "-s", "/run/entry.sh"]
+# ENTRYPOINT ["/usr/bin/tini", "-s", "/run/entry.sh"]
+ENTRYPOINT ["/bin//bash"]

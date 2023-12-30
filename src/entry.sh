@@ -18,5 +18,9 @@ cd /run
 trap - ERR
 info "Booting image using $VERS..."
 
+boot_cmd="exec qemu-system-x86_64 ${ARGS:+ $ARGS}"
+echo "/tmp/boot_cmd.sh: boot_cmd=$boot_cmd"
+echo $boot_cmd > /tmp/boot_cmd.sh
+chmod uga+x /tmp/boot_cmd.sh
 [[ "$DEBUG" == [Yy1]* ]] && set -x
-exec qemu-system-x86_64 ${ARGS:+ $ARGS}
+/tmp/boot_cmd.sh
