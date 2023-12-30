@@ -1,27 +1,12 @@
-FROM debian:trixie-slim
+# FROM debian:trixie-slim
+FROM debian:latest
 
 ARG DEBCONF_NOWARNINGS="yes"
 ARG DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && apt-get -y upgrade && \
-    apt-get --no-install-recommends -y install \
- 	tini \
-	wget \
-        ovmf \
-	procps \
-	iptables \
-	iproute2 \
-	dnsmasq \
-	net-tools \
-        qemu-utils \
-	ca-certificates \
-	netcat-openbsd \
-	qemu-system-x86 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
 COPY ./src /run/
 RUN chmod +x /run/*.sh
+RUN /run/configure_debian.sh
 
 VOLUME /storage
 EXPOSE 22 5900
